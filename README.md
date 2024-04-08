@@ -9,5 +9,3 @@ Este proyecto es un resumidor de artículos de código abierto que transforma ar
 - Interfaz de usuario intuitiva y fácil de usar.
 - Historial para acceder fácilmente a los artículos previamente resumidos.
 - Opción para descargar el resumen en formato PDF.
-
-

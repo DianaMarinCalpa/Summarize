@@ -120,7 +120,7 @@ const Demo = () => {
               <p>↵</p>
             </button>
           </form>
-          <button onClick={handleOpenModal} className='rounded-full bg-white w-6 fixed bottom-20 right-10 md:right-8 z-40'><img
+          <button onClick={handleOpenModal} className='rounded-full bg-white w-6 fixed bottom-5 right-5 z-40 ' ><img
             src={historia}
             alt title='Historial'
           /></button>
