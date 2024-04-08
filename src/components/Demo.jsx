@@ -13,7 +13,6 @@ const Demo = () => {
   const [allArticles, setAllArticles] = useState([]);
   const [copied, setCopied] = useState("");
   const [copiedText, setCopiedText] = useState("");
-
   // RTK lazy query
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
 
@@ -81,13 +80,6 @@ const Demo = () => {
     setTimeout(() => setCopiedText(false), 3000);
   });
 
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
   const countWords = (text) => {
     return text.trim().split(/\s+/).length;
   };
@@ -120,16 +112,39 @@ const Demo = () => {
               <p>↵</p>
             </button>
           </form>
-          <button onClick={handleOpenModal} className='rounded-full bg-white w-6 fixed bottom-5 right-5 z-40 ' ><img
+          <button onClick={() => setShowModal(true)} className='rounded-full bg-white w-6 fixed bottom-5 right-5 z-40 ' ><img
             src={historia}
+            type="button"
             alt title='Historial'
           /></button>
+            
         </div>
         {/* Modal */}
         {showModal && (
-          <div className='fixed bottom-0 right-0 bg-white border h-screen border-gray-200 p-4 z-40 max-w-xs'>
-            <h2 className='font-satoshi font-bold text-gray-600 text-xl py-2'>Historial</h2>
-            <div className=" flex flex-col gap-2 ">
+          <>
+           <div
+            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+          >
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                  <h3 className="text-3xl font-semibold">
+                    Historial
+                  </h3>
+                  <button
+                    className="p-1 ml-auto  border-0 text-black  float-right text-3xl leading-none font-semibold "
+                    onClick={() => setShowModal(false)}
+                  >
+                    <span className="text-black h-6 w-6 text-2xl block">
+                      ×
+                    </span>
+                  </button>
+                </div>
+                {/*body*/}
+                <div className="relative p-6 flex-auto">
+                <div className=" flex flex-col gap-2 ">
             {allArticles.reverse().map((item, index) => (
             <div
               key={`link-${index}`}
@@ -140,10 +155,10 @@ const Demo = () => {
                 <img
                   src={copied === item.url ? tick : copy}
                   alt title={copied === item.url ? "Copiado" : "Copiar"}
-                  className='w-[40%] h-[40%]  object-contain'
+                  className='w-8 h-8  object-contain'
                 />
               </div>
-              <p className='flex-1 font-satoshi text-blue-700 font-medium text-sm truncate'>
+              <p className='flex-1 font-satoshi text-blue-700 font-medium text-sm '>
                 {item.url}
               </p>
 
@@ -165,11 +180,27 @@ const Demo = () => {
             </div>
 
           ))}</div>
-            <button onClick={handleCloseModal} className='bg-gray-200 hover:bg-gray-300 px-2 py-1 mt-4 rounded'>Cerrar</button>
+                </div>
+             
+              </div>
+            </div>
           </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          
+         
+
+
+          </>
+
         )}
       </div>
+
+
+
       {/* Display Result */}
+
+
+
       <div className='my-10 max-w-full flex justify-center items-center'>
         {isFetching ? (
           <img src={loader} alt='loader' className='w-20 h-20 object-contain' />
